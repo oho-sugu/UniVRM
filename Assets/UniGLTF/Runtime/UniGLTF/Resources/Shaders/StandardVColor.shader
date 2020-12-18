@@ -23,6 +23,7 @@ Shader "UniGLTF/StandardVColor" {
 		struct Input {
 			float2 uv_MainTex;
 			float4 v_Color;
+			UNITY_VERTEX_OUTPUT_STEREO
 		};
 
 		half _Glossiness;
@@ -37,7 +38,10 @@ Shader "UniGLTF/StandardVColor" {
 		UNITY_INSTANCING_BUFFER_END(Props)
 
 		void vert(inout appdata_full v, out Input o){
+			UNITY_SETUP_INSTANCE_ID(v);
 			UNITY_INITIALIZE_OUTPUT(Input, o);
+			UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+
 			o.v_Color = v.color;
 		}
 

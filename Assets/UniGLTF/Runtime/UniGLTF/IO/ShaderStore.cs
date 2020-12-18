@@ -10,7 +10,7 @@ namespace UniGLTF
 
     public class ShaderStore : IShaderStore
     {
-        readonly string m_defaultShaderName = "Standard";
+        readonly string m_defaultShaderName = "Mixed Reality Toolkit/Standard";
         Shader m_default;
         Shader Default
         {
