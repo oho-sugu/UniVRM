@@ -251,7 +251,19 @@ namespace VRM
                 Camera.main.Render();
                 tex.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);
                 tex.Apply();
-                File.WriteAllBytes(dst, tex.EncodeToJPG());
+
+                var ext = Path.GetExtension(dst).ToLower();
+                switch (ext)
+                {
+                    case ".png":
+                        File.WriteAllBytes(dst, tex.EncodeToPNG());
+                        break;
+
+                    case ".jpg":
+                        File.WriteAllBytes(dst, tex.EncodeToJPG());
+                        break;
+                }
+
                 var assetPath = MeshUtility.UnityPath.FromFullpath(dst);
                 EditorApplication.delayCall += () =>
                 {

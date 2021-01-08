@@ -11,7 +11,7 @@ namespace VRM
         /// <summary>
         /// UNIGLTF
         /// </summary>
-        static string UniGltfVersionPath = "Assets/UniGLTF/UniGLTF/Scripts/UniGLTFVersion.cs";
+        static string UniGltfVersionPath = "Assets/UniGLTF/Runtime/UniGLTF/UniGLTFVersion.cs";
 
         const string UniGltfVersionTemplate = @"
 namespace UniGLTF
@@ -29,7 +29,7 @@ namespace UniGLTF
         /// <summary>
         /// VRM
         /// </summary>
-        const string VrmVersionPath = "Assets/VRM/UniVRM/Scripts/Format/VRMVersion.cs";
+        const string VrmVersionPath = "Assets/VRM/Runtime/Format/VRMVersion.cs";
         const string VrmVersionTemplate = @"
 namespace VRM
 {{
@@ -75,21 +75,6 @@ namespace VRM
   }}
 }}
 "),
-            new UpmPackage("MeshUtility", "Assets/MeshUtility/package.json",
-@"{{
-  ""name"": ""com.vrmc.meshutility"",
-  ""version"": ""{1}"",
-  ""displayName"": ""MeshUtility"",
-  ""unity"": ""2018.4"",
-  ""description"": ""MeshUtility is a package for mesh separation, etc. \n\nCheck out the latest information here: <https://github.com/vrm-c/UniVRM/tree/master/Assets/MeshUtility>"",
-  ""keywords"": [
-    ""mesh""
-  ],
-  ""author"": {{
-    ""name"": ""VRM Consortium""
-  }}
-}}
-"),
             new UpmPackage("VRM", "Assets/VRM/package.json",
 @"{{
   ""name"": ""com.vrmc.univrm"",
@@ -108,7 +93,6 @@ namespace VRM
   }},
   ""dependencies"": {{
     ""com.vrmc.vrmshaders"": ""{1}"",
-    ""com.vrmc.meshutility"": ""{1}"",
     ""com.vrmc.unigltf"": ""{0}""
   }}
 }}

@@ -85,6 +85,26 @@ namespace UniGLTF
         }
         #endregion
 
+        #region Animation
+        protected IAnimationImporter m_animationImporter;
+        public void SetAnimationImporter(IAnimationImporter animationImporter)
+        {
+            m_animationImporter = animationImporter;
+        }
+        public IAnimationImporter AnimationImporter
+        {
+            get
+            {
+                if (m_animationImporter == null)
+                {
+                    m_animationImporter = new RootAnimationImporter();
+                }
+                return m_animationImporter;
+            }
+        }
+
+        #endregion
+
         IShaderStore m_shaderStore;
         public IShaderStore ShaderStore
         {
@@ -149,13 +169,17 @@ namespace UniGLTF
 
             try
             {
-                var index = generatorVersion.IndexOf('.');
-                var generatorMajor = int.Parse(generatorVersion.Substring(8, index - 8));
-                var generatorMinor = int.Parse(generatorVersion.Substring(index + 1));
+                var splitted = generatorVersion.Substring(8).Split('.');
+                var generatorMajor = int.Parse(splitted[0]);
+                var generatorMinor = int.Parse(splitted[1]);
 
                 if (generatorMajor < major)
                 {
                     return true;
+                }
+                else if (generatorMajor > major)
+                {
+                    return false;
                 }
                 else
                 {
@@ -588,7 +612,7 @@ namespace UniGLTF
                 {
                     using (MeasureTime("AnimationImporter"))
                     {
-                        AnimationImporter.ImportAnimation(this);
+                        AnimationImporter.Import(this);
                     }
                 })
                 .ContinueWithCoroutine(Scheduler.MainThread, OnLoadModel)
